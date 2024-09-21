@@ -74,6 +74,10 @@ class PathPlanner(Node):
                         f_score[neighbor] = tentative_g_score + heuristic(neighbor, goal)
                         heapq.heappush(open_set, (f_score[neighbor], neighbor))
 
+        # If we exit the loop and never reach the goal, we didn't find a path
+        self.get_logger().info("No path found")
+        return
+
 
     def reconstruct_path(self, came_from, current):
         # New list, starting from the goal
@@ -90,12 +94,12 @@ class PathPlanner(Node):
 
     # Publish the entire path as 2D array
     def publish_path(self, path):
-        # Convert path (list of tuples) into a 2D array format
+        # Convert path into a 2D array
         path_array = [[x, y] for (x, y) in path]
 
-        # Convert the path array to JSON format and publish as a string
+        # Convert the path to JSON
         msg = String()
-        msg.data = json.dumps(path_array)  # Convert to JSON string for easy transmission
+        msg.data = json.dumps(path_array)
         self.path_publisher.publish(msg)
 
         self.get_logger().info(f'Published Path: {msg.data}')

@@ -27,12 +27,12 @@ class MapPublisher(Node):
         # Keep track of each paths endpoint to connect them later
         path_endpoints = []
         self.create_isolated_paths(grid, min_path_length, path_endpoints)
-        self.connect_paths(grid, path_endpoints)
+        # self.connect_paths(grid, path_endpoints)
         return grid
     
     # Generates N number of isolated Paths for the Map
     def create_isolated_paths(self, grid, min_path_length, path_endpoints):
-        for _ in range(10):  # Create at least 10 paths
+        for _ in range(4):  # Create N paths
             path_length = random.randint(min_path_length, min_path_length + 50)
 
             # Pick Random Start Point

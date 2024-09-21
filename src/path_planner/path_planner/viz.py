@@ -119,7 +119,7 @@ def main(args=None):
     # Main loop to handle both ROS2 events and Pygame events
     running = True
     while rclpy.ok() and running:
-        rclpy.spin_once(node, timeout_sec=0.1)  # Non-blocking call to handle ROS2 events
+        rclpy.spin_once(node, timeout_sec=0.1)
 
         # Handle Pygame events
         for event in pygame.event.get():
@@ -130,7 +130,7 @@ def main(args=None):
         if node.animation_in_progress:
             node.animate_path()
 
-        pygame.time.wait(50)  # Small delay to reduce CPU usage
+        # pygame.time.wait(50)
 
     node.destroy_node()
     rclpy.shutdown()
